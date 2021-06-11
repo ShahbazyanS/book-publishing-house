@@ -17,7 +17,8 @@ public class CurrentUserDetailServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = userService.findByEmail(s);
+        String locale = "en";
+        User user = userService.findByEmail(s, locale);
         if (user == null) {
             throw new UsernameNotFoundException("Username not found");
         }

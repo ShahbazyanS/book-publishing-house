@@ -40,14 +40,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
                 .and()
                 .authorizeRequests()
+
+                .antMatchers(HttpMethod.GET, "/admin", "/user/allUsers").hasAnyAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST, "/admin", "/contact", "/pub_house").hasAnyAuthority("ADMIN")
+                .antMatchers(HttpMethod.PUT, "/admin", "/contact", "/pub_house").hasAnyAuthority("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/admin", "/contact", "/user", "/pub_house").hasAnyAuthority("ADMIN")
+
+                .antMatchers(HttpMethod.POST,"/author", "/book").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.PUT,"/author", "/book", "/user").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.DELETE,"/author", "/book").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.GET, "/user").hasAnyAuthority("USER", "ADMIN")
+
                 .anyRequest().permitAll();
-//                .antMatchers(HttpMethod.GET).permitAll()
-//                .antMatchers(HttpMethod.DELETE).hasAnyAuthority("ADMIN")
-//                .antMatchers(HttpMethod.PUT).hasAnyAuthority("ADMIN")
-//                .antMatchers(HttpMethod.POST, "/user").permitAll()
-//                .antMatchers(HttpMethod.DELETE, "/user").hasAnyAuthority("USER","ADMIN")
-//                .antMatchers(HttpMethod.PUT, "/user").hasAnyAuthority("USER","ADMIN")
-//                .antMatchers(HttpMethod.POST).hasAnyAuthority("ADMIN");
 
         http
                 .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);

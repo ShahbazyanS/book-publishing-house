@@ -1,10 +1,7 @@
 package com.example.book.publishinghouse.endpoint;
 
 import com.example.book.publishinghouse.dto.BookDto;
-import com.example.book.publishinghouse.exceptions.ResourcesNotFoundException;
 import com.example.book.publishinghouse.model.Book;
-import com.example.book.publishinghouse.model.User;
-import com.example.book.publishinghouse.services.BookServices;
 import com.example.book.publishinghouse.services.BookServicesImpl;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -13,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Locale;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,8 +24,8 @@ public class BookController {
         return bookServices.findAll(locale);
     }
 
-    @GetMapping("/{bookId}")
-    public Book findbyId(@PathVariable("bookId") int bookId,@RequestHeader("Accept-Language") String locale){
+    @GetMapping("/{bookId}/{locale}")
+    public Book findbyId(@PathVariable("bookId") int bookId,@PathVariable("locale") String locale){
         return bookServices.findById(bookId, locale);
     }
 

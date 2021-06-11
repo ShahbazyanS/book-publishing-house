@@ -21,6 +21,8 @@ public class BookDto {
     @NotBlank
     private String description;
     @NotBlank
+    private String picUrl;
+    @NotBlank
     private Genre genre;
     @NotNull
     private Author author;

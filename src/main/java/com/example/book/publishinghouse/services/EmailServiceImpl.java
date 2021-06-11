@@ -5,6 +5,7 @@ import com.example.book.publishinghouse.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -51,5 +52,19 @@ public class EmailServiceImpl implements EmailService {
         // Send mail
         this.javaMailSender.send(mimeMessage);
         LOGGER.info(ReturnCode.OK);
+    }
+
+    public void sendSimpleMessage(String to, String text, User user, String link) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        final Context ctx = new Context();
+        ctx.setVariable("user", user);
+        ctx.setVariable("url", link);
+//        final String htmlContent = this.templateEngine.process(ctx);
+        message.setFrom("noreply@baeldung.com");
+        message.setTo(to);
+//        message.setSubject(subject);
+
+        message.setText(text);
+        this.javaMailSender.send(message);
     }
 }

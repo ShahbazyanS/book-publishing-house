@@ -52,7 +52,7 @@ public class BookServicesImpl implements BookServices {
 
     @Override
     public List<Book> findByAuthorId(int id, String locale) {
-        Author author = authorServices.findById(id);
+        Author author = authorServices.findById(id, locale);
         List<Book> allByAuthor = bookRepository.findAllByAuthor(author);
         if (author != null && !allByAuthor.isEmpty()){
             LOGGER.info(messageSource.getMessage(

@@ -16,6 +16,9 @@ public class User {
     private String email;
     private String password;
     private boolean active = false;
+    @ManyToOne
+    @JoinColumn(name = "pub_house_id")
+    private PublishingHouse publishingHouse;
     @Enumerated(EnumType.STRING)
     private UserType userType = UserType.USER;
     private String token;

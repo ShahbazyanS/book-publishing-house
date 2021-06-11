@@ -29,7 +29,7 @@ public class UserServicesImpl implements UserServices {
         User byEmail = userRepository.findByEmail(email);
         if (byEmail == null) {
             LOGGER.info(messageSource.getMessage(
-                    "error.messages.user.not.found", null, new Locale(locale)));
+                    "error.messages.user.not.found", null, Locale.getDefault()));
         }
         LOGGER.info(ReturnCode.OK);
         return byEmail;
@@ -66,10 +66,18 @@ public class UserServicesImpl implements UserServices {
                 () -> new ResourcesNotFoundException(
                         messageSource.getMessage(
                                 "error.messages.user.not.found", null, new Locale(locale)))));
+        List<User> users = userRepository.findAll();
+        for (User user1 : users) {
+            if (user1.getEmail().equals(user.getEmail())) {
+                LOGGER.info(ReturnCode.SERVER_ERROR);
+                throw new DuplicateValueException(messageSource.getMessage(
+                        "duplicate.email", null, new Locale(locale)));
+            }
+        }
         userDb.setName(user.getName());
         userDb.setEmail(user.getEmail());
         userDb.setPassword(user.getPassword());
-        return this.addUser(userDb, locale);
+        return userRepository.save(userDb);
     }
 
     @Override
@@ -87,5 +95,10 @@ public class UserServicesImpl implements UserServices {
                         "error.messages.user.not.found", null, new Locale(locale))));
         LOGGER.info(ReturnCode.OK);
         return user;
+    }
+
+    @Override
+    public User activate(User user) {
+        return userRepository.save(user);
     }
 }

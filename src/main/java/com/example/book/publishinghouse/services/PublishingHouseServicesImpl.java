@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Locale;
 
 @Service
@@ -36,6 +37,11 @@ public class PublishingHouseServicesImpl implements PublishingHouseServices{
         PublishingHouse save = pubHouseRepository.save(publishingHouse);
         LOGGER.info(ReturnCode.OK);
         return save;
+    }
+
+    @Override
+    public List<PublishingHouse> pubHouses() {
+        return pubHouseRepository.findAll();
     }
 
     @Override

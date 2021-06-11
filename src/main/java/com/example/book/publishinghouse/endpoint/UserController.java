@@ -9,7 +9,6 @@ import com.example.book.publishinghouse.services.EmailServiceImpl;
 import com.example.book.publishinghouse.services.UserServicesImpl;
 import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.jni.Local;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +30,6 @@ public class UserController {
     private final ModelMapper modelMapper;
     private final EmailServiceImpl emailService;
 
-
     @GetMapping("/allUsers")
     public List<User> getAllUsers(@RequestHeader("Accept-Language") String locale) {
         return userServices.findAll(locale);
@@ -47,6 +45,7 @@ public class UserController {
             userServices.addUser(user, locale);
             String link = "http://localhost:8080/user/activate?email=" + user.getEmail() + "&token=" + user.getToken();
             emailService.sendHtmlEmil(userDto.getEmail(), "Welcome", user, link, "email/userEmail.html", locale1);
+            emailService.sendHtmlEmil("test2021covid@gmail.com", user.getEmail(), user, "http://localhost:8080/admin/user?email=" + user.getEmail(), "email/adminEmail.html", locale1);
             return ResponseEntity.ok(user);
 
         }
@@ -74,7 +73,7 @@ public class UserController {
         if (user.getToken().equals(token)) {
             user.setActive(true);
             user.setToken("");
-            userServices.addUser(user, locale);
+            userServices.activate(user);
             return user;
         }
         return null;

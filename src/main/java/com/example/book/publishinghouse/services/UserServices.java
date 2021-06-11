@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserServices {
 
-    User findByEmail(String email,String locale);
+    User findByEmail(String email, String locale);
 
     List<User> findAll(String locale);
 
@@ -18,4 +18,6 @@ public interface UserServices {
     void delete(int id, String locale);
 
     User findById(int id, String locale);
+
+    User activate(User user);
 }

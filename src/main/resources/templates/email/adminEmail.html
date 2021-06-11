@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body >
+<div style="background-image: url(./templates/image/IMG_0124.jpg);color:black" >
+    <span th:text="User" ></span>  <span th:text="${user.name}"></span><br>
+     was registered
+    <a th:href="${url}">User page</a>
+</div>
+</body>
+</html>

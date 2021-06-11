@@ -16,9 +16,8 @@ public class PublishingHouse {
     private String name;
     @OneToOne
     private Contact contact;
-    @OneToOne
-    private User user;
-    @OneToMany
+    @OneToMany(mappedBy = "publishingHouse")
+    private List<User> users;
+    @OneToMany(mappedBy = "publishingHouse")
     private List<Book> books;
-
 }
