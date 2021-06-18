@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/book")
+@CrossOrigin(origins = "http://localhost:4200")
 public class BookController {
 
     private final BookServicesImpl bookServices;
@@ -24,8 +25,13 @@ public class BookController {
         return bookServices.findAll(locale);
     }
 
-    @GetMapping("/{bookId}/{locale}")
-    public Book findbyId(@PathVariable("bookId") int bookId,@PathVariable("locale") String locale){
+    @GetMapping("/last9")
+    public List<Book> findLastBooks(@RequestHeader("Accept-Language") String locale) {
+        return bookServices.findLastBooks(locale);
+    }
+
+    @GetMapping("/{bookId}")
+    public Book findbyId(@PathVariable("bookId") int bookId, @RequestHeader("Accept-Language") String locale){
         return bookServices.findById(bookId, locale);
     }
 

@@ -51,6 +51,17 @@ public class BookServicesImpl implements BookServices {
     }
 
     @Override
+    public List<Book> findLastBooks(String locale) {
+        List<Book> allBooks = bookRepository.findLastBooks();
+        if (allBooks.isEmpty()){
+            LOGGER.info(messageSource.getMessage(
+                    "error.messages.null.value", null, new Locale(locale)));
+        }
+        LOGGER.info(ReturnCode.OK);
+        return allBooks;
+    }
+
+    @Override
     public List<Book> findByAuthorId(int id, String locale) {
         Author author = authorServices.findById(id, locale);
         List<Book> allByAuthor = bookRepository.findAllByAuthor(author);

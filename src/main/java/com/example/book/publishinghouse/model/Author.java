@@ -3,6 +3,7 @@ package com.example.book.publishinghouse.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -17,5 +18,7 @@ public class Author {
     @Enumerated(value = EnumType.STRING)
     private Gender gender;
     private String bio;
+    @OneToMany(mappedBy = "author")
+    private List<Book> books;
 
 }

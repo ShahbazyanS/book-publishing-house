@@ -14,6 +14,8 @@ public interface BookServices {
 
     List<Book> findAll(String locale);
 
+    List<Book> findLastBooks(String locale);
+
     List<Book> findByAuthorId(int id,String locale);
 
     Book findById(int id, String local);
