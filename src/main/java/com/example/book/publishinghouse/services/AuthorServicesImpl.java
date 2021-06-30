@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Locale;
 
 @Service
@@ -35,5 +36,10 @@ public class AuthorServicesImpl implements AuthorServices{
                         "error.messages.author.not.found", null, new Locale(locale))));
         LOGGER.info(ReturnCode.OK);
         return author;
+    }
+
+    @Override
+    public List<Author> getAll() {
+        return authorRepository.findAll();
     }
 }

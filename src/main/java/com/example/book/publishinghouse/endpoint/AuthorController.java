@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/author")
@@ -25,5 +27,10 @@ public class AuthorController {
     public Author addAuthor(@RequestBody AuthorDto authorDto){
         Author author = modelMapper.map(authorDto, Author.class);
         return authorServices.addAuthor(author);
+    }
+
+    @GetMapping("/all")
+    public List<Author> getAllAuthors(){
+        return authorServices.getAll();
     }
 }

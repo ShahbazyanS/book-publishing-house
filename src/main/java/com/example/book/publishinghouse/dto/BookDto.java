@@ -2,6 +2,7 @@ package com.example.book.publishinghouse.dto;
 
 import com.example.book.publishinghouse.model.Author;
 import com.example.book.publishinghouse.model.Genre;
+import com.example.book.publishinghouse.model.PublishingHouse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,4 +27,6 @@ public class BookDto {
     private Genre genre;
     @NotNull
     private Author author;
+    @NotNull
+    private PublishingHouse publishingHouse;
 }

@@ -32,6 +32,10 @@ public class PublishingHouseServicesImpl implements PublishingHouseServices{
         return publishingHouse;
     }
 
+    public PublishingHouse byId(int id){
+       return pubHouseRepository.getOne(id);
+    }
+
     @Override
     public PublishingHouse add(PublishingHouse publishingHouse) {
         PublishingHouse save = pubHouseRepository.save(publishingHouse);

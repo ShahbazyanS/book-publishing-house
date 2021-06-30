@@ -28,7 +28,7 @@ public class PublishingHouseController {
 
     @GetMapping("/all")
     public List<PublishingHouse> findAll() {
-        return publishingHouseServices.pubHouses();
+            return publishingHouseServices.pubHouses();
     }
 
     @PostMapping
