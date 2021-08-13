@@ -81,4 +81,10 @@ public class BookServicesImpl implements BookServices {
         LOGGER.info(ReturnCode.OK);
         return book;
     }
+
+    @Override
+    public List<Book> searchBook(String word) {
+        return bookRepository.searchProduct(word);
+    }
+
 }

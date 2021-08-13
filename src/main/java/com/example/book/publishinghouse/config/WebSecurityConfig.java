@@ -41,15 +41,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
 
-//                .antMatchers(HttpMethod.GET, "/admin", "/user/allUsers").hasAnyAuthority("ADMIN")
+//                .antMatchers(HttpMethod.GET, "/admin", "/user/allUsers").hasAnyAuthority("USER", "ADMIN")
 //                .antMatchers(HttpMethod.POST, "/admin", "/contact", "/pub_house").hasAnyAuthority("ADMIN")
 //                .antMatchers(HttpMethod.PUT, "/admin", "/contact", "/pub_house").hasAnyAuthority("ADMIN")
-//                .antMatchers(HttpMethod.DELETE, "/admin", "/contact", "/user", "/pub_house").hasAnyAuthority("ADMIN")
+//                .antMatchers(HttpMethod.DELETE, "/pub_house").hasAnyAuthority("ADMIN")
 //
 //                .antMatchers(HttpMethod.POST,"/author", "/book").hasAnyAuthority("USER", "ADMIN")
 //                .antMatchers(HttpMethod.PUT,"/author", "/book", "/user").hasAnyAuthority("USER", "ADMIN")
-//                .antMatchers(HttpMethod.DELETE,"/author", "/book").hasAnyAuthority("USER", "ADMIN")
-//                .antMatchers(HttpMethod.GET, "/user").hasAnyAuthority("USER", "ADMIN")
+//                .antMatchers(HttpMethod.DELETE,"/book/**").hasAnyAuthority("USER", "ADMIN")
+//                .antMatchers(HttpMethod.DELETE,"/pub_house/**").hasAnyAuthority( "ADMIN")
+//                .antMatchers(HttpMethod.DELETE,"/author", "/book/**", "/pub_house/**").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.GET, "/user/allUsers").hasAnyAuthority("USER", "ADMIN")
 
                 .anyRequest().permitAll();
 

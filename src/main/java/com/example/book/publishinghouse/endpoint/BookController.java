@@ -1,9 +1,7 @@
 package com.example.book.publishinghouse.endpoint;
 
 import com.example.book.publishinghouse.dto.BookDto;
-import com.example.book.publishinghouse.dto.TestBookDto;
 import com.example.book.publishinghouse.model.Book;
-import com.example.book.publishinghouse.model.PublishingHouse;
 import com.example.book.publishinghouse.services.BookServicesImpl;
 import com.example.book.publishinghouse.services.PublishingHouseServicesImpl;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -54,10 +51,10 @@ public class BookController {
     }
 
     @PostMapping
-    public Book addBook(@RequestBody TestBookDto bookDto){
-        PublishingHouse byId = publishingHouseServices.byId(bookDto.getPubId());
+    public Book addBook(@RequestBody BookDto bookDto){
+//        PublishingHouse byId = publishingHouseServices.byId(bookDto.getPubId());
         Book book = modelMapper.map(bookDto, Book.class);
-        book.setPublishingHouse(byId);
+        book.setPublishingHouse(bookDto.getPublishingHouse());
         return bookServices.addBook(book);
     }
 
@@ -72,5 +69,10 @@ public class BookController {
     byte[] getImage(@RequestParam("name") String imageName) throws IOException {
         InputStream in = new FileInputStream(uploadDir + File.separator + imageName);
         return IOUtils.toByteArray(in);
+    }
+
+    @GetMapping("/search/{word}")
+    public  List<Book> search(@PathVariable("word") String word){
+        return bookServices.searchBook(word);
     }
 }

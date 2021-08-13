@@ -7,7 +7,6 @@ import com.example.book.publishinghouse.model.User;
 import com.example.book.publishinghouse.security.JwtTokenUtil;
 import com.example.book.publishinghouse.services.EmailServiceImpl;
 import com.example.book.publishinghouse.services.UserServicesImpl;
-import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -37,7 +36,7 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<User> save(@RequestBody UserDto userDto, @RequestHeader("Accept-Language") String locale, Locale locale1) throws MessagingException, javax.mail.MessagingException {
+    public ResponseEntity<User> save(@RequestBody UserDto userDto, @RequestHeader("Accept-Language") String locale, Locale locale1) {
         if (userDto.getPassword().equals(userDto.getConfirmPassword())) {
             userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
             User user = modelMapper.map(userDto, User.class);

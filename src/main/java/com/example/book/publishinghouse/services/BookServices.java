@@ -1,10 +1,8 @@
 package com.example.book.publishinghouse.services;
 
 import com.example.book.publishinghouse.model.Book;
-import org.apache.tomcat.jni.Local;
 
 import java.util.List;
-import java.util.Locale;
 
 public interface BookServices {
 
@@ -19,5 +17,7 @@ public interface BookServices {
     List<Book> findByAuthorId(int id,String locale);
 
     Book findById(int id, String local);
+
+    List<Book> searchBook(String word);
 
 }
